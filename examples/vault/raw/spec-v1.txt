@@ -1,0 +1,3 @@
+Synthetic product specification, revision 1.
+Demonstration spindle speed: 1200 rpm.
+These numbers are invented fixtures, not real product specifications.

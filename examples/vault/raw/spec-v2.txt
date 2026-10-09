@@ -1,0 +1,3 @@
+Synthetic product specification, revision 2, supersedes revision 1.
+Demonstration spindle speed corrected to 1000 rpm.
+These numbers are invented fixtures, not real product specifications.
