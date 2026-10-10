@@ -199,6 +199,8 @@ mindmap
 | JSON cases / set comparison | 預期核對集合、對照方法與漏列／多列 | `evaluation/` |
 | Mermaid | 流程圖、心智圖 | 本 README |
 
+[獨立 AI 複審與修正紀錄](docs/review-2026-10-10.md)包含 reviewer 找到的反例、修復與仍未證明的範圍。
+
 ## 驗證結果與限制
 
 - 合成來源版本切換：三個依賴頁列入，一個只有一般關聯的頁面排除；腳本修正文句後仍待驗收。
