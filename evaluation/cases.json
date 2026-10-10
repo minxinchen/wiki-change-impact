@@ -3,7 +3,7 @@
   "author": "Nio (Master)",
   "fixture_author": "Codex",
   "date": "2026-10-10",
-  "provenance": "New synthetic corpus; no customer facts or private text. Labels written before evaluation runner. Agent-authored development set, not human gold or held-out benchmark.",
+  "provenance": "New synthetic corpus; no customer facts or private text. Original nine labels written before evaluation runner; body-only-change added from independent AI review before the fix. Agent-authored development set, not human gold or held-out benchmark.",
   "review_target": "Current wiki pages whose stated facts or evidence support need reconsideration after the supplied change. Pure whitespace does not change facts. Expected status separately describes the byte/dependency contract, including known semantic misses.",
   "base_files": {
     "content/raw/policy.txt": "虛構文件中心：單份附件上限為 1200 字元。\n",
@@ -203,7 +203,7 @@
         "docs:wiki/faq.md"
       ],
       "expected_status": "needs_review",
-      "rationale": "concept與guide更換依據且正文尚未清理；faq沿用guide。舊policy→concept與新concept→guide不是單一版本完整路徑。"
+      "rationale": "concept與guide更換依據且正文尚未清理；faq沿用guide。舊policy→concept與新concept→guide不是單一版本完整路徑。 起始 FAQ 已有支撐缺口；這是既有缺陷加上接線變更的案例，不是乾淨起始狀態。"
     },
     {
       "id": "unrelated-file",
@@ -223,6 +223,29 @@
       "expected_review_pages": [],
       "expected_status": "unchanged",
       "rationale": "材料與四頁正文無關，且未被宣告依賴；無需核對。"
+    },
+    {
+      "id": "body-only-change",
+      "title": "只改概念正文，sources 不變",
+      "before_overrides": {},
+      "vaults": {
+        "docs": {
+          "root": "content",
+          "pages": [
+            "wiki/*.md"
+          ]
+        }
+      },
+      "after_updates": {
+        "content/wiki/concept.md": "---\nsources: [raw/policy.txt]\n---\n依據 raw/policy.txt，單份附件上限為 9999 字元。\n"
+      },
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "expected_status": "needs_review",
+      "rationale": "概念正文改成與來源矛盾的 9999，概念頁本身及依據它的指南、FAQ 都需核對；由 ChatGPT 複審提出的未覆蓋反例。"
     }
   ]
 }

@@ -94,7 +94,7 @@ def evaluate(path=None):
             'cases_sha256':hashlib.sha256(raw).hexdigest(),
             'implementation_sha256':hashlib.sha256(Path(w.__file__).read_bytes()).hexdigest(),
             'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            'interpretation':'Descriptive counts on 9 agent-authored cases, not population accuracy or time saved. Known misses/extras are retained; status correctness and semantic usefulness are separate.',
+            'interpretation':'Descriptive counts on 10 agent-authored development cases, not population accuracy or time saved. Known misses/extras are retained; status correctness and semantic usefulness are separate.',
             'all_status_contracts_match':all(r['status_contract_matches'] for r in rows),
             'totals':totals,'cases':rows}
 
@@ -115,7 +115,7 @@ def render(result):
     parts.append('<section><h2>跨案例頁面判定累計</h2><table><tr><th>方法</th><th>正確列出</th><th>多列</th><th>漏列</th></tr>')
     for method, counts in result['totals'].items():
         parts.append('<tr><td>'+names[method]+'</td>'+''.join('<td>'+str(counts[k])+'</td>' for k in ('tp','fp','fn'))+'</tr>')
-    parts.append('</table><p>相同頁面在不同變更案例中分別計數。不是九個案例之外的準確率。</p></section>')
+    parts.append('</table><p>相同頁面在不同變更案例中分別計數。不是這組開發案例之外的準確率。</p></section>')
     for row in result['cases']:
         parts.append('<section><h2>'+esc(row['title'])+'</h2><p>'+esc(row['rationale'])+'</p>'
                      '<p>工具狀態：'+esc(row['report']['status'])+'；預期應核對：'+esc(', '.join(row['expected_review_pages']) or '無')+'</p>')

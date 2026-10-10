@@ -48,6 +48,22 @@ class ImpactTests(unittest.TestCase):
         self.assertEqual(item['reasons'][0]['kind'],'dependency_changed')
         self.assertEqual(item['reasons'][0]['added_sources'],['demo:raw/spec-v2.txt'])
 
+    def test_body_only_change_includes_page_and_descendants(self):
+        page = self.v/'wiki/concept.md'
+        page.write_text(page.read_text()+'\nnew unsupported claim\n')
+        report = w.compare(self.before,w.snapshot(self.c))
+        self.assertEqual({x['page'] for x in report['impacted_pages']},
+                         {'demo:wiki/concept.md','demo:wiki/product.md','demo:wiki/comparison.md'})
+        own = next(x for x in report['impacted_pages'] if x['page']=='demo:wiki/concept.md')
+        self.assertEqual(own['reasons'][0]['kind'],'page_changed')
+        self.assertIn('頁面本身變更',w.render(report))
+
+    def test_changed_leaf_page_is_not_lost_without_descendants(self):
+        page = self.v/'wiki/comparison.md'
+        page.write_text(page.read_text()+'\nchanged body\n')
+        report = w.compare(self.before,w.snapshot(self.c))
+        self.assertEqual([x['page'] for x in report['impacted_pages']],['demo:wiki/comparison.md'])
+
     def test_scan_error_blocks(self):
         def failing_walk(root, followlinks=False, onerror=None):
             onerror(PermissionError('unreadable directory'))

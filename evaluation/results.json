@@ -1,35 +1,35 @@
 {
   "schema_version": 1,
-  "provenance": "New synthetic corpus; no customer facts or private text. Labels written before evaluation runner. Agent-authored development set, not human gold or held-out benchmark.",
-  "cases_sha256": "e4301e4d6690d3b7c9b16bffcec60828c03ca1a1ec528a330897ba8d54cbe3a1",
-  "implementation_sha256": "6d89ab62c2d0ff5e317f43da4ad7d684653ad183191cc5790541f9939921e077",
-  "runner_sha256": "27761ca4fc51cc539ee7a45fe44cdcf41519435aec14fced048c7d8bafb2a6fb",
-  "interpretation": "Descriptive counts on 9 agent-authored cases, not population accuracy or time saved. Known misses/extras are retained; status correctness and semantic usefulness are separate.",
+  "provenance": "New synthetic corpus; no customer facts or private text. Original nine labels written before evaluation runner; body-only-change added from independent AI review before the fix. Agent-authored development set, not human gold or held-out benchmark.",
+  "cases_sha256": "331fd94d566d0d70a19fede53457badb274fbb3711ae9e4ed42f3cb7a9169ce0",
+  "implementation_sha256": "41b05ed9940207d52d3f6d76dd1a6892884fcaf7c345c018020334b11f163fe3",
+  "runner_sha256": "5e9ce5244ac3f9c6e019297cd5bc29fa5767cef285f230571ff27729c20cd408",
+  "interpretation": "Descriptive counts on 10 agent-authored development cases, not population accuracy or time saved. Known misses/extras are retained; status correctness and semantic usefulness are separate.",
   "all_status_contracts_match": true,
   "totals": {
     "literal_scan": {
-      "tp": 9,
+      "tp": 11,
       "fp": 2,
-      "fn": 9,
-      "listed": 11,
-      "precision": 0.8181818181818182,
-      "recall": 0.5
+      "fn": 10,
+      "listed": 13,
+      "precision": 0.8461538461538461,
+      "recall": 0.5238095238095238
     },
     "review_all": {
-      "tp": 18,
-      "fp": 18,
+      "tp": 21,
+      "fp": 19,
       "fn": 0,
-      "listed": 36,
-      "precision": 0.5,
+      "listed": 40,
+      "precision": 0.525,
       "recall": 1.0
     },
     "dependency_tool": {
-      "tp": 15,
+      "tp": 18,
       "fp": 3,
       "fn": 3,
-      "listed": 18,
-      "precision": 0.8333333333333334,
-      "recall": 0.8333333333333334
+      "listed": 21,
+      "precision": 0.8571428571428571,
+      "recall": 0.8571428571428571
     }
   },
   "cases": [
@@ -914,6 +914,14 @@
                   "before"
                 ],
                 "path_scope": "single_version"
+              },
+              {
+                "kind": "page_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md"
+                ],
+                "change_kind": "modified"
               }
             ]
           },
@@ -1989,7 +1997,7 @@
     {
       "id": "mixed-versions",
       "title": "同時重接引用關係",
-      "rationale": "concept與guide更換依據且正文尚未清理；faq沿用guide。舊policy→concept與新concept→guide不是單一版本完整路徑。",
+      "rationale": "concept與guide更換依據且正文尚未清理；faq沿用guide。舊policy→concept與新concept→guide不是單一版本完整路徑。 起始 FAQ 已有支撐缺口；這是既有缺陷加上接線變更的案例，不是乾淨起始狀態。",
       "expected_review_pages": [
         "docs:wiki/concept.md",
         "docs:wiki/guide.md",
@@ -2124,6 +2132,14 @@
                   "before"
                 ],
                 "path_scope": "single_version"
+              },
+              {
+                "kind": "page_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md"
+                ],
+                "change_kind": "modified"
               }
             ]
           },
@@ -2284,6 +2300,14 @@
                   "after"
                 ],
                 "path_scope": "single_version"
+              },
+              {
+                "kind": "page_changed",
+                "changed_source": "docs:wiki/guide.md",
+                "path": [
+                  "docs:wiki/guide.md"
+                ],
+                "change_kind": "modified"
               }
             ]
           }
@@ -2500,6 +2524,264 @@
             "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
             "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
             "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "body-only-change",
+      "title": "只改概念正文，sources 不變",
+      "rationale": "概念正文改成與來源矛盾的 9999，概念頁本身及依據它的指南、FAQ 都需核對；由 ChatGPT 複審提出的未覆蓋反例。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md"
+          ],
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "docs:wiki/concept.md",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "page_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md"
+                ],
+                "change_kind": "modified"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "296a40818fbe884579f258e1e743cb6a671a0e514249f65bfc70c61d7c0dd3b0",
             "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
             "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
             "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"

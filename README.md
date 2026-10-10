@@ -2,7 +2,7 @@
 
 **一份來源更新後，哪些知識頁需要重新核對？**
 
-本工具讀取 Markdown 的 `sources`，建立來源依賴圖並保存 SHA-256 快照。比對兩個版本時，列出變動檔案、直接與間接受影響的頁面，以及每頁的引用路徑與邊的版本（before／after）。JSON 可接後續流程，HTML 供人檢閱。
+本工具讀取 Markdown 的 `sources`，建立來源依賴圖並保存 SHA-256 快照。比對兩個版本時，列出變動檔案、直接改動頁與下游候選頁，以及每頁的引用路徑與邊的版本（before／after）。JSON 可接後續流程，HTML 供人檢閱。
 
 這是 Wiki 更新流程中的唯讀檢查工具。它不修改 Wiki、不呼叫 LLM，也不以檔案變動推斷內容正確與否。
 
@@ -69,15 +69,15 @@ python3 -m venv .venv
 .venv/bin/python -B evaluation/run.py --out runs/evaluation-v2
 ```
 
-[完整輸入與预期集合](evaluation/cases.json)、[實際逐例結果](evaluation/results.json)和[研究方法與討論](docs/evaluation.md)都在 repo。HTML 會列出多列與漏列，不把「狀態契約符合」當作「內容判斷正確」。
+[完整輸入與預期集合](evaluation/cases.json)、[實際逐例結果](evaluation/results.json)和[研究方法與討論](docs/evaluation.md)都在 repo。HTML 會列出多列與漏列，不把「狀態契約符合」當作「內容判斷正確」。
 
-這是 Codex 新製的九個合成開發案例，不是獨立泛化測試或人工 gold standard。跨案例累計：
+這是 Codex 新製的十個合成開發案例，不是獨立泛化測試或人工 gold standard。跨案例累計：
 
 | 方法 | 正確列出 | 多列 | 漏列 |
 |---|---:|---:|---:|
-| 直接文字搜尋（單層） | 9 | 2 | 9 |
-| 全部核對 | 18 | 18 | 0 |
-| 依賴工具 | 15 | 3 | 3 |
+| 直接文字搜尋（單層） | 11 | 2 | 10 |
+| 全部核對 | 21 | 19 | 0 |
+| 依賴工具 | 18 | 3 | 3 |
 
 依賴工具在多層案例補到直接搜尋看不到的頁面，卻無法恢復漏寫的來源關係；只改空白也會保守列入。這些計數不證明一般準確率或人工時間節省。
 
@@ -141,7 +141,7 @@ mkdir -p runs
 flowchart TD
     A[Vault registry：根目錄與頁面範圍] --> B[唯讀掃描 Markdown]
     B --> BC{逐 Vault 覆蓋符合預期？}
-    BC -->|否| L[blocked：明示空範圍]
+    BC -->|否| LC[blocked：明示空範圍]
     BC -->|是| C[YAML sources：明確來源依賴]
     C --> D[檔案雜湊與依賴圖快照]
     E[前次基準快照] --> F[比對檔案指紋與追蹤集合]
@@ -155,7 +155,7 @@ flowchart TD
     K -->|有| L[blocked：保留問題，不自動修補]
 ```
 
-先將 `page → source` 反轉成 `source → dependents`，另比對每頁來源集合，將切換引用的頁面直接列入待核對，再從每個變動檔案進行 breadth-first search（廣度優先搜尋）。前後兩版的邊取聯集，避免來源引用被刪掉時漏列影響；因此可能保守地多列頁面，包含跨版本拼接的路徑。`seen` 集合讓循環依賴能終止。
+先將 `page → source` 反轉成 `source → dependents`，另比對每頁來源集合，將直接改動的頁面（包括 sources 未變的正文更動）列入待核對，再從每個變動檔案進行 breadth-first search（廣度優先搜尋）。前後兩版的邊取聯集，避免來源引用被刪掉時漏列影響；因此可能保守地多列頁面，包含跨版本拼接的路徑。`seen` 集合讓循環依賴能終止。
 
 對 C 個變動檔案、V 個節點、E 條邊，遍歷上界為 O(C × (V + E))，另加讀檔與雜湊成本。此版不提供大型知識庫的增量索引或效能保證。
 

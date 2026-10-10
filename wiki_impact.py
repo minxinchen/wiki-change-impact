@@ -196,7 +196,14 @@ def compare(before, after):
                               'path':[page], 'added_sources':sorted(new-old),
                               'removed_sources':sorted(old-new)}]
     for change in changes:
-        seed = change['file']; queue = deque([(seed,[seed])]); seen = {seed}
+        seed = change['file']
+        # A changed selected page is itself a review candidate, even when
+        # its sources are unchanged. Descendant traversal alone omits it.
+        if seed in after['pages']:
+            impacted.setdefault(seed,[]).append({
+                'kind':'page_changed', 'changed_source':seed, 'path':[seed],
+                'change_kind':change['kind']})
+        queue = deque([(seed,[seed])]); seen = {seed}
         while queue:
             node, chain = queue.popleft()
             for dependent in sorted(reverse.get(node,[])):
@@ -224,6 +231,8 @@ def render(report):
     esc = lambda x: html.escape(str(x))
     rows = ''.join('<tr><td>'+esc(c['file'])+'</td><td>'+esc(c['kind'])+'</td></tr>' for c in report['changes'])
     def reason_label(r):
+        if r.get('kind') == 'page_changed':
+            return '頁面本身變更，需核對：'+r['changed_source']+'（'+r['change_kind']+'）'
         if r.get('kind') == 'dependency_changed':
             return ('引用集合變更：'+r['changed_source']+'；新增：'+', '.join(r['added_sources'])
                     +'；移除：'+', '.join(r['removed_sources']))
