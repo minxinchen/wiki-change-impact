@@ -76,7 +76,7 @@ class ImpactTests(unittest.TestCase):
     def test_cross_vault(self):
         other=self.root/'other';other.mkdir()
         (other/'source.txt').write_text('evidence')
-        self.c['other']={'root':str(other),'pages':['*.md']}
+        self.c['other']={'root':str(other),'pages':['*.md'],'allow_empty_pages':True}
         (self.v/'wiki/concept.md').write_text('---\nsources: [other:source.txt]\n---\nx')
         before=w.snapshot(self.c)
         (other/'source.txt').write_text('corrected')
@@ -127,6 +127,68 @@ class ImpactTests(unittest.TestCase):
     def test_empty_scope_not_clean(self):
         self.c['demo']['pages']=['none/*.md']
         self.assertTrue(w.snapshot(self.c)['issues'])
+
+    def test_one_empty_vault_cannot_hide_behind_another(self):
+        other=self.root/'other';other.mkdir()
+        self.c['other']={'root':str(other),'pages':['wiki/*.md']}
+        s=w.snapshot(self.c)
+        self.assertEqual(s['coverage']['other']['matched_pages'],0)
+        self.assertIn('other:*',{i['page'] for i in s['issues']})
+        with self.assertRaises(ValueError):w.validate_snapshot(s)
+
+    def test_vault_loses_all_matches_blocks_check(self):
+        # Empty wildcard result is a scope failure even when other vaults remain valid.
+        other=self.root/'other';other.mkdir()
+        (other/'source.txt').write_text('source')
+        page=other/'page.md';page.write_text('---\nsources: [source.txt]\n---\npage')
+        self.c['other']={'root':str(other),'pages':['*.md']}
+        before=w.snapshot(self.c);page.unlink()
+        report=w.compare(before,w.snapshot(self.c))
+        self.assertEqual(report['status'],'blocked')
+        self.assertIn('other: 0 頁',w.render(report))
+
+    def test_allow_empty_is_explicit_boolean(self):
+        data=json.loads(self.config_path.read_text())
+        for value in ['false',1,None]:
+            data['vaults']['demo']['allow_empty_pages']=value
+            self.config_path.write_text(json.dumps(data))
+            with self.assertRaises(ValueError):w.load_config(self.config_path)
+
+    def test_all_empty_even_when_allowed_is_not_useful_baseline(self):
+        self.c['demo'].update(pages=['none/*.md'],allow_empty_pages=True)
+        self.assertTrue(w.snapshot(self.c)['issues'])
+
+    def test_old_schema_or_missing_coverage_refused(self):
+        for bad in [dict(self.before,schema_version=1),dict(self.before,coverage={})]:
+            with self.assertRaises(ValueError):w.compare(bad,w.snapshot(self.c))
+
+    def test_coverage_count_tampering_refused(self):
+        bad=copy.deepcopy(self.before);bad['coverage']['demo']['matched_pages']=0
+        with self.assertRaises(ValueError):w.validate_snapshot(bad)
+
+    def test_mixed_version_route_is_not_single_version_evidence(self):
+        # Before: S -> A, B -> unrelated. After: A -> unrelated, A -> B.
+        a=self.v/'wiki/concept.md';b=self.v/'wiki/product.md'
+        b.write_text('---\nsources: [raw/unrelated.txt]\n---\nB')
+        before=w.snapshot(self.c)
+        a.write_text('---\nsources: [raw/unrelated.txt]\n---\nA')
+        b.write_text('---\nsources: [wiki/concept.md]\n---\nB')
+        (self.v/'raw/spec-v1.txt').write_text('changed S')
+        report=w.compare(before,w.snapshot(self.c))
+        item=next(x for x in report['impacted_pages'] if x['page']=='demo:wiki/product.md')
+        r=next(x for x in item['reasons'] if x.get('changed_source')=='demo:raw/spec-v1.txt')
+        self.assertEqual(r['path_scope'],'cross_version_candidate')
+        self.assertEqual(r['path_versions'],[])
+        self.assertEqual([e['versions'] for e in r['edges']],[['before'],['after']])
+        self.assertIn('非單一版本引用鏈',w.render(report))
+
+    def test_unchanged_edges_belong_to_both_versions(self):
+        (self.v/'raw/spec-v1.txt').write_text('changed')
+        report=w.compare(self.before,w.snapshot(self.c))
+        for item in report['impacted_pages']:
+            for reason in item['reasons']:
+                self.assertEqual(reason['path_versions'],['after','before'])
+                self.assertEqual(reason['path_scope'],'single_version')
 
 
 if __name__=='__main__':unittest.main()

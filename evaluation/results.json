@@ -1,0 +1,2532 @@
+{
+  "schema_version": 1,
+  "provenance": "New synthetic corpus; no customer facts or private text. Labels written before evaluation runner. Agent-authored development set, not human gold or held-out benchmark.",
+  "cases_sha256": "e4301e4d6690d3b7c9b16bffcec60828c03ca1a1ec528a330897ba8d54cbe3a1",
+  "implementation_sha256": "6d89ab62c2d0ff5e317f43da4ad7d684653ad183191cc5790541f9939921e077",
+  "runner_sha256": "27761ca4fc51cc539ee7a45fe44cdcf41519435aec14fced048c7d8bafb2a6fb",
+  "interpretation": "Descriptive counts on 9 agent-authored cases, not population accuracy or time saved. Known misses/extras are retained; status correctness and semantic usefulness are separate.",
+  "all_status_contracts_match": true,
+  "totals": {
+    "literal_scan": {
+      "tp": 9,
+      "fp": 2,
+      "fn": 9,
+      "listed": 11,
+      "precision": 0.8181818181818182,
+      "recall": 0.5
+    },
+    "review_all": {
+      "tp": 18,
+      "fp": 18,
+      "fn": 0,
+      "listed": 36,
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    "dependency_tool": {
+      "tp": 15,
+      "fp": 3,
+      "fn": 3,
+      "listed": 18,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334
+    }
+  },
+  "cases": [
+    {
+      "id": "unchanged",
+      "title": "沒有變更",
+      "rationale": "內容與来源均未變，不需新增核對工作。",
+      "expected_review_pages": [],
+      "methods": {
+        "literal_scan": {
+          "listed": [],
+          "correct": [],
+          "extra": [],
+          "missed": [],
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [],
+          "extra": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "dependency_tool": {
+          "listed": [],
+          "correct": [],
+          "extra": [],
+          "missed": [],
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "unchanged",
+        "changes": [],
+        "impacted_pages": [],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "fact-change",
+      "title": "上限更正：三層正文仍是舊值",
+      "rationale": "concept、guide、faq 都寫1200；保留期限與附件上限無關。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "docs:raw/policy.txt",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "222dca7509f8daafe9851469c011ce824ab41a9b03dec698005d770b6d0b2282",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "format-only",
+      "title": "只增加空白行",
+      "rationale": "來源事實完全相同；本語料的語意核對目標不要求因空白變更重審正文。工具仍應報位元組變動。",
+      "expected_review_pages": [],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md"
+          ],
+          "correct": [],
+          "extra": [
+            "docs:wiki/concept.md"
+          ],
+          "missed": [],
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [],
+          "extra": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [],
+          "extra": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "missed": [],
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "docs:raw/policy.txt",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "4e621877850b88fccf725cfa05978082bc8f6be1a7bab60b93deca88367715db",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "revision-switch",
+      "title": "保留舊版、引用改為新規範",
+      "rationale": "引用新規範1000但三層正文仍1200，三頁均需核對。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md"
+          ],
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.6666666666666666
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "docs:raw/policy-v2.txt",
+            "kind": "newly_tracked"
+          },
+          {
+            "file": "docs:raw/policy.txt",
+            "kind": "no_longer_tracked"
+          },
+          {
+            "file": "docs:wiki/concept.md",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "dependency_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md"
+                ],
+                "added_sources": [
+                  "docs:raw/policy-v2.txt"
+                ],
+                "removed_sources": [
+                  "docs:raw/policy.txt"
+                ]
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy-v2.txt",
+                "path": [
+                  "docs:raw/policy-v2.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy-v2.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy-v2.txt",
+                "path": [
+                  "docs:raw/policy-v2.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy-v2.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "before"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy-v2.txt",
+                "path": [
+                  "docs:raw/policy-v2.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy-v2.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "before"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy-v2.txt": "222dca7509f8daafe9851469c011ce824ab41a9b03dec698005d770b6d0b2282",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "55432f2899ad173eae1416344831001be75dbf581d1e8d7a24fef887e4682a2f",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy-v2.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "missing-source",
+      "title": "來源被移除",
+      "rationale": "來源不可取得，三頁限制失去可核實依據；不能作乾淨報告。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "blocked",
+        "changes": [
+          {
+            "file": "docs:raw/policy.txt",
+            "kind": "no_longer_tracked"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [
+          {
+            "page": "docs:raw/policy.txt",
+            "message": "file missing: docs:raw/policy.txt"
+          }
+        ],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": [
+            {
+              "page": "docs:raw/policy.txt",
+              "message": "file missing: docs:raw/policy.txt"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "undeclared-body",
+      "title": "正文依據存在但sources漏標",
+      "rationale": "正文仍明确引用policy的1200，但frontmatter誤填storage；其衍生guide與faq也需核對。這是已知漏宣告反例，不要求工具自動讀懂。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [],
+          "correct": [],
+          "extra": [],
+          "missed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "unchanged",
+        "changes": [],
+        "impacted_pages": [],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "7945526ced5a2a507fa22eca792ef882ca4ce0ae41cae65933cdb91db9542446",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/storage.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "7945526ced5a2a507fa22eca792ef882ca4ce0ae41cae65933cdb91db9542446",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/storage.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "cross-vault",
+      "title": "來源專用vault更新",
+      "rationale": "三頁正文仍1200；來源在另一個明示允許無wiki頁的vault。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md"
+          ],
+          "extra": [],
+          "missed": [
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          },
+          "source": {
+            "matched_pages": 0,
+            "allow_empty_pages": true,
+            "patterns": [
+              "*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "source:policy.txt",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "source:policy.txt",
+                "path": [
+                  "source:policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "source:policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "source:policy.txt",
+                "path": [
+                  "source:policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "source:policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "source:policy.txt",
+                "path": [
+                  "source:policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "source:policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            },
+            "source": {
+              "matched_pages": 0,
+              "allow_empty_pages": true,
+              "patterns": [
+                "*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "0020c82ec0533b71d8b8823dcafdbbad1bf1a21d0646ff616124a2dbf2a05607",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297",
+            "source:policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "source:policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            },
+            "source": {
+              "matched_pages": 0,
+              "allow_empty_pages": true,
+              "patterns": [
+                "*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "0020c82ec0533b71d8b8823dcafdbbad1bf1a21d0646ff616124a2dbf2a05607",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297",
+            "source:policy.txt": "222dca7509f8daafe9851469c011ce824ab41a9b03dec698005d770b6d0b2282"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "source:policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "mixed-versions",
+      "title": "同時重接引用關係",
+      "rationale": "concept與guide更換依據且正文尚未清理；faq沿用guide。舊policy→concept與新concept→guide不是單一版本完整路徑。",
+      "expected_review_pages": [
+        "docs:wiki/concept.md",
+        "docs:wiki/guide.md",
+        "docs:wiki/faq.md"
+      ],
+      "methods": {
+        "literal_scan": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0
+        },
+        "dependency_tool": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "correct": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md"
+          ],
+          "extra": [],
+          "missed": [],
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "changes": [
+          {
+            "file": "docs:raw/policy.txt",
+            "kind": "no_longer_tracked"
+          },
+          {
+            "file": "docs:wiki/concept.md",
+            "kind": "modified"
+          },
+          {
+            "file": "docs:wiki/guide.md",
+            "kind": "modified"
+          }
+        ],
+        "impacted_pages": [
+          {
+            "page": "docs:wiki/concept.md",
+            "reasons": [
+              {
+                "kind": "dependency_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md"
+                ],
+                "added_sources": [
+                  "docs:raw/storage.txt"
+                ],
+                "removed_sources": [
+                  "docs:raw/policy.txt"
+                ]
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/faq.md",
+            "reasons": [
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [],
+                "path_scope": "cross_version_candidate"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after"
+                ],
+                "path_scope": "single_version"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/guide.md",
+                "path": [
+                  "docs:wiki/guide.md",
+                  "docs:wiki/faq.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/guide.md",
+                    "dependent": "docs:wiki/faq.md",
+                    "versions": [
+                      "after",
+                      "before"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after",
+                  "before"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          },
+          {
+            "page": "docs:wiki/guide.md",
+            "reasons": [
+              {
+                "kind": "dependency_changed",
+                "changed_source": "docs:wiki/guide.md",
+                "path": [
+                  "docs:wiki/guide.md"
+                ],
+                "added_sources": [
+                  "docs:wiki/concept.md"
+                ],
+                "removed_sources": [
+                  "docs:raw/storage.txt"
+                ]
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:raw/policy.txt",
+                "path": [
+                  "docs:raw/policy.txt",
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:raw/policy.txt",
+                    "dependent": "docs:wiki/concept.md",
+                    "versions": [
+                      "before"
+                    ]
+                  },
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after"
+                    ]
+                  }
+                ],
+                "path_versions": [],
+                "path_scope": "cross_version_candidate"
+              },
+              {
+                "kind": "source_changed",
+                "changed_source": "docs:wiki/concept.md",
+                "path": [
+                  "docs:wiki/concept.md",
+                  "docs:wiki/guide.md"
+                ],
+                "edges": [
+                  {
+                    "source": "docs:wiki/concept.md",
+                    "dependent": "docs:wiki/guide.md",
+                    "versions": [
+                      "after"
+                    ]
+                  }
+                ],
+                "path_versions": [
+                  "after"
+                ],
+                "path_scope": "single_version"
+              }
+            ]
+          }
+        ],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8b8a1651a0f1de19b7b6970d72138dc76764ef5ff41df1653171eefc8caeb2f4",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:raw/storage.txt"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "d75677002ae641276b0556899172871103c5859bf79686107222bdd5a4122573",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8296918c9370cfa20aa9e3b588f86d71997f33104ea12ee561c563db3ac913e1",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/storage.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    },
+    {
+      "id": "unrelated-file",
+      "title": "未引用的新材料",
+      "rationale": "材料與四頁正文無關，且未被宣告依賴；無需核對。",
+      "expected_review_pages": [],
+      "methods": {
+        "literal_scan": {
+          "listed": [],
+          "correct": [],
+          "extra": [],
+          "missed": [],
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        },
+        "review_all": {
+          "listed": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "correct": [],
+          "extra": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "missed": [],
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null
+        },
+        "dependency_tool": {
+          "listed": [],
+          "correct": [],
+          "extra": [],
+          "missed": [],
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "status_contract_matches": true,
+      "report": {
+        "schema_version": 2,
+        "coverage": {
+          "docs": {
+            "matched_pages": 4,
+            "allow_empty_pages": false,
+            "patterns": [
+              "wiki/*.md"
+            ]
+          }
+        },
+        "status": "unchanged",
+        "changes": [],
+        "impacted_pages": [],
+        "issues": [],
+        "meaning": "dependency impact, not a claim that page content is wrong"
+      },
+      "snapshots": {
+        "before": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        },
+        "after": {
+          "schema_version": 2,
+          "coverage": {
+            "docs": {
+              "matched_pages": 4,
+              "allow_empty_pages": false,
+              "patterns": [
+                "wiki/*.md"
+              ]
+            }
+          },
+          "files": {
+            "docs:raw/policy.txt": "adbba1daab90824bca57797c6c30790c3801070e42224d213aaedbf2a51ad6df",
+            "docs:raw/storage.txt": "ea3b7cb7b4cfd52c0e44a1f841864427aba5bce47887556ce59b3e487970320f",
+            "docs:wiki/concept.md": "474e0a5a3b05497e3a78436c1dbd11c1c4e6b4c1d08bc04302be841af162bb1b",
+            "docs:wiki/faq.md": "6b2baa6e6c437f77a0e5e884a7691bf7e2a0a7b987fdaf6b8eec684b5edc4da8",
+            "docs:wiki/guide.md": "8168fde1054633ab07ada7dccd8f7776c71246e9389f35ea84d22d91707f776c",
+            "docs:wiki/storage.md": "f458554e8c99884012f7d9511977c448efda012d51f46178bb013be8b2019297"
+          },
+          "pages": [
+            "docs:wiki/concept.md",
+            "docs:wiki/faq.md",
+            "docs:wiki/guide.md",
+            "docs:wiki/storage.md"
+          ],
+          "dependencies": {
+            "docs:wiki/concept.md": [
+              "docs:raw/policy.txt"
+            ],
+            "docs:wiki/faq.md": [
+              "docs:wiki/guide.md"
+            ],
+            "docs:wiki/guide.md": [
+              "docs:wiki/concept.md"
+            ],
+            "docs:wiki/storage.md": [
+              "docs:raw/storage.txt"
+            ]
+          },
+          "issues": []
+        }
+      }
+    }
+  ]
+}

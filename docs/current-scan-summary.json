@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-10",
+  "kind": "new_read_only_scan_not_reconstruction_of_prior_experiment",
+  "pages": 23,
+  "tracked_files": 33,
+  "edges": 48,
+  "issues": 0,
+  "before_after_equal": true,
+  "content_quality_verified": false,
+  "historical_snapshot_recovered": false,
+  "private_snapshot_sha256": "c9206c9f39243e023b99fde92cbbf93f3bea0aa29765c98117c064c77bbcf68e"
+}

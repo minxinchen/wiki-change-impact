@@ -38,7 +38,11 @@ def load_config(path):
         patterns = value.get('pages')
         if not isinstance(patterns,list) or not patterns or not all(isinstance(x,str) and x and not x.startswith('/') and '..' not in x.split('/') for x in patterns):
             raise ValueError('pages must be nonempty relative glob patterns')
-        result[key] = {'root':str(root), 'pages':sorted(set(patterns))}
+        allow_empty = value.get('allow_empty_pages', False)
+        if type(allow_empty) is not bool:
+            raise ValueError('allow_empty_pages must be boolean')
+        result[key] = {'root':str(root), 'pages':sorted(set(patterns)),
+                       'allow_empty_pages':allow_empty}
     return result
 
 
@@ -90,9 +94,10 @@ def metadata(raw):
 
 
 def snapshot(config):
-    files, pages, dependencies, issues = {}, [], {}, []
+    files, pages, dependencies, issues, coverage = {}, [], {}, [], {}
     for v, spec in sorted(config.items()):
         root = Path(spec['root'])
+        matched = 0
         def walk_error(exc):
             issues.append({'page':v+':*','message':'directory scan failed: '+str(exc)})
         for parent, dirs, names in os.walk(root,followlinks=False,onerror=walk_error):
@@ -100,6 +105,7 @@ def snapshot(config):
             for name in sorted(names):
                 rel = (Path(parent)/name).relative_to(root).as_posix()
                 if not any(fnmatch.fnmatchcase(rel,p) for p in spec['pages']): continue
+                matched += 1
                 identity = v+':'+rel; pages.append(identity); dependencies[identity] = []
                 try:
                     raw = read_file(config,identity); files[identity] = digest(raw)
@@ -107,28 +113,49 @@ def snapshot(config):
                     dependencies[identity] = sorted(set(reference(v,r,config) for r in refs))
                 except (ValueError,UnicodeError,yaml.YAMLError,OSError) as exc:
                     issues.append({'page':identity,'message':str(exc)})
-    if not pages: issues.append({'page':'*','message':'no pages matched'})
+        allow_empty = spec.get('allow_empty_pages', False)
+        if type(allow_empty) is not bool:
+            raise ValueError('allow_empty_pages must be boolean')
+        coverage[v] = {'matched_pages':matched, 'allow_empty_pages':allow_empty,
+                       'patterns':spec['pages']}
+        if not matched and not allow_empty:
+            issues.append({'page':v+':*','message':'no pages matched in required vault'})
+    if not pages: issues.append({'page':'*','message':'no pages matched across all vaults'})
     for refs in dependencies.values():
         for target in refs:
             if target in files: continue
             try: files[target] = digest(read_file(config,target))
             except (ValueError,OSError) as exc:
                 issues.append({'page':target,'message':str(exc)})
-    return {'schema_version':1,'config_sha256':digest(canonical(config)),
+    return {'schema_version':2,'config_sha256':digest(canonical(config)),
+            'coverage':coverage,
             'files':dict(sorted(files.items())), 'pages':sorted(pages),
             'dependencies':dict(sorted(dependencies.items())),
             'issues':sorted(issues,key=lambda x:(x['page'],x['message']))}
 
 
 def validate_snapshot(s):
-    if not isinstance(s,dict) or s.get('schema_version') != 1:
-        raise ValueError('unsupported snapshot schema')
+    if not isinstance(s,dict) or s.get('schema_version') != 2:
+        raise ValueError('snapshot schema 2 required; review scope and create a new baseline')
     if not isinstance(s.get('files'),dict) or not isinstance(s.get('dependencies'),dict):
         raise ValueError('invalid snapshot maps')
     if not isinstance(s.get('pages'),list) or not all(isinstance(x,str) for x in s['pages']):
         raise ValueError('invalid snapshot pages')
     if len(s['pages']) != len(set(s['pages'])) or set(s['dependencies']) != set(s['pages']):
         raise ValueError('snapshot page/dependency mismatch')
+    coverage = s.get('coverage')
+    if not isinstance(coverage,dict) or not coverage or not s['pages']:
+        raise ValueError('baseline missing scan coverage')
+    if any(p.split(':',1)[0] not in coverage for p in s['pages']):
+        raise ValueError('page outside coverage')
+    for vault, item in coverage.items():
+        if (not isinstance(item,dict) or type(item.get('matched_pages')) is not int
+                or type(item.get('allow_empty_pages')) is not bool
+                or not isinstance(item.get('patterns'),list) or not item['patterns']):
+            raise ValueError('invalid scan coverage')
+        count = sum(p.startswith(vault+':') for p in s['pages'])
+        if item['matched_pages'] != count or (not count and not item['allow_empty_pages']):
+            raise ValueError('baseline scan coverage mismatch or empty required vault')
     if not isinstance(s.get('issues'),list) or s['issues']:
         raise ValueError('baseline has unresolved structural issues')
     if not isinstance(s.get('config_sha256'),str) or not re.fullmatch('[0-9a-f]{64}',s['config_sha256']):
@@ -144,6 +171,8 @@ def validate_snapshot(s):
 
 def compare(before, after):
     validate_snapshot(before)
+    if after.get('schema_version') != 2 or not isinstance(after.get('coverage'),dict):
+        raise ValueError('current snapshot requires schema 2 scan coverage')
     if before['config_sha256'] != after['config_sha256']:
         raise ValueError('configuration changed; compare with the same vault roots and page patterns')
     changes = []
@@ -152,10 +181,12 @@ def compare(before, after):
         if old != new:
             changes.append({'file':key,'kind':'newly_tracked' if old is None else 'no_longer_tracked' if new is None else 'modified'})
     # Union preserves impact when a dependency is removed by the same update.
-    reverse = {}
-    for graph in [before['dependencies'],after['dependencies']]:
+    reverse, edge_versions = {}, {}
+    for version, graph in [('before',before['dependencies']),('after',after['dependencies'])]:
         for page, refs in graph.items():
-            for target in refs: reverse.setdefault(target,set()).add(page)
+            for target in refs:
+                reverse.setdefault(target,set()).add(page)
+                edge_versions.setdefault((target,page),set()).add(version)
     impacted = {}
     for page in after['pages']:
         old = set(before['dependencies'].get(page, []))
@@ -172,10 +203,18 @@ def compare(before, after):
                 if dependent in seen: continue
                 seen.add(dependent); route = chain+[dependent]
                 if dependent in after['pages']:
-                    impacted.setdefault(dependent,[]).append({'kind':'source_changed','changed_source':seed,'path':route})
+                    edges = [{'source':a, 'dependent':b,
+                              'versions':sorted(edge_versions[(a,b)])}
+                             for a,b in zip(route,route[1:])]
+                    common = set.intersection(*(set(e['versions']) for e in edges))
+                    impacted.setdefault(dependent,[]).append({
+                        'kind':'source_changed','changed_source':seed,'path':route,
+                        'edges':edges,'path_versions':sorted(common),
+                        'path_scope':'single_version' if common else 'cross_version_candidate'})
                 queue.append((dependent,route))
-    return {'schema_version':1,'baseline_sha256':digest(canonical(before)),
+    return {'schema_version':2,'baseline_sha256':digest(canonical(before)),
             'current_sha256':digest(canonical(after)),
+            'coverage':after['coverage'],
             'status':'blocked' if after['issues'] else 'needs_review' if changes else 'unchanged',
             'changes':changes,'impacted_pages':[{'page':p,'reasons':impacted[p]} for p in sorted(impacted)],
             'issues':after['issues'], 'meaning':'dependency impact, not a claim that page content is wrong'}
@@ -188,10 +227,17 @@ def render(report):
         if r.get('kind') == 'dependency_changed':
             return ('引用集合變更：'+r['changed_source']+'；新增：'+', '.join(r['added_sources'])
                     +'；移除：'+', '.join(r['removed_sources']))
-        return ' → '.join(r['path'])
+        if 'edges' not in r: return ' → '.join(r['path'])
+        scope = ('跨版本保守候選；非單一版本引用鏈' if r['path_scope']=='cross_version_candidate'
+                 else '整條路徑成立版本：'+', '.join(r['path_versions']))
+        return scope+'｜'+r['path'][0]+''.join(
+            ' —['+'/'.join(e['versions'])+']→ '+e['dependent'] for e in r['edges'])
     impacts = ''.join('<section><h3>'+esc(p['page'])+'</h3>'+''.join('<p>'+esc(reason_label(r))+'</p>' for r in p['reasons'])+'</section>' for p in report['impacted_pages'])
     issues = ''.join('<li>'+esc(i['page']+': '+i['message'])+'</li>' for i in report['issues'])
-    return '''<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Wiki 來源變更影響</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:0 24px;background:#f4f6f8;color:#172838}h1{line-height:1.3}section,table{background:white;border:1px solid #ccd6de;padding:16px;border-radius:8px;width:100%;box-sizing:border-box;margin:16px 0}td{padding:8px;overflow-wrap:anywhere}p{overflow-wrap:anywhere}.status{font-weight:bold;color:#145676}</style><h1>Wiki 來源變更影響</h1><p>來源版本 → 依賴關係 → 待核對頁面。此報告只讀檔案，不修改 Wiki；依賴變動不等於內容錯誤。</p><p class="status">'''+esc(report['status'])+'</p><h2>檔案變動</h2><table><tr><th>檔案</th><th>變動</th></tr>'+rows+'</table><h2>受影響頁面與依賴路徑</h2>'+ (impacts or '<p>未找到受影響頁面。</p>')+'<h2>結構問題</h2><ul>'+issues+'</ul></html>'
+    coverage = ''.join('<li>'+esc(v)+': '+esc(c['matched_pages'])+' 頁；允許空集合：'+
+                       esc(c['allow_empty_pages'])+'；範圍：'+esc(', '.join(c['patterns']))+'</li>'
+                       for v,c in report.get('coverage',{}).items())
+    return '''<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Wiki 來源變更影響</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:0 24px;background:#f4f6f8;color:#172838}h1{line-height:1.3}section,table{background:white;border:1px solid #ccd6de;padding:16px;border-radius:8px;width:100%;box-sizing:border-box;margin:16px 0}td{padding:8px;overflow-wrap:anywhere}p{overflow-wrap:anywhere}.status{font-weight:bold;color:#145676}</style><h1>Wiki 來源變更影響</h1><p>來源版本 → 依賴關係 → 待核對頁面。此報告只讀檔案，不修改 Wiki；依賴變動不等於內容錯誤。</p><p class="status">'''+esc(report['status'])+'</p><h2>逐 Vault 掃描覆蓋</h2><ul>'+coverage+'</ul><h2>檔案變動</h2><table><tr><th>檔案</th><th>變動</th></tr>'+rows+'</table><h2>受影響頁面與依賴路徑</h2>'+ (impacts or '<p>未找到受影響頁面。</p>')+'<h2>結構問題</h2><ul>'+issues+'</ul></html>'
 
 
 def write_new(path, data, config, protected=()):
