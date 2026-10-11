@@ -98,5 +98,11 @@
     "maintenance_pass": false,
     "promotion_gate_issues": 7
   },
-  "timing_note": "Prompt cache, sequential runs and variable runtime preclude comparative speed/cost conclusions."
+  "timing_note": "Prompt cache, sequential runs and variable runtime preclude comparative speed/cost conclusions.",
+  "score_order": [
+    "classification",
+    "positioning_and_terminology",
+    "unknown_stress",
+    "conflict_handling"
+  ]
 }

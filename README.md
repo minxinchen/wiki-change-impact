@@ -75,8 +75,9 @@ mindmap
 | 技術／方法 | 中文用途 | 現況 |
 |---|---|---|
 | Markdown + YAML | 知識頁、類型、來源與關係 | 既有 Wiki 使用 |
-| Index-first / file search | 索引導覽、關鍵字與按需讀取 | 既有 SOP；尚待固定條件比較 |
+| Index-first / file search | 索引導覽、關鍵字與按需讀取 | 已做固定案例；模型未遵守 index-first |
 | Agent instructions | Ingest、Query、Lint 與未知處理 | 既有規則；遵守程度需看實際工具紀錄 |
+| Qwen + MLX / bounded tool loop | 本機生成、受限檢索與隔離修訂 | 已完成五組查詢；完整維護未通過 |
 | Python + PyYAML | 來源解析、快照、變更影響報告 | Repo 內可重跑模組 |
 | SHA-256 + reverse graph / BFS | 版本辨識、下游依賴提示 | 不判讀語意或補齊漏宣告來源 |
 | Human / AI review | 領域校正、引用與輸出審查 | 人類知識校正與 AI review 分別記錄 |
@@ -94,6 +95,6 @@ mindmap
 - [x] 執行新來源整合、既有頁更新、重問與 reviewer 核對，保存失敗。
 - [ ] 通過完整維護驗收：來源、日期、入口與log同步；衝突查核及術語正確。
 
-私人對話與業務原文不在此 repo；[案例頁](docs/wiki-workflow/case-study.md)明示哪些只能由持有本機來源的人核對。研究主張以材料可支持的範圍為限。
+私人對話與業務完整原文不在此 repo；[案例頁](docs/wiki-workflow/case-study.md)明示哪些只能由持有本機來源的人核對。研究主張以材料可支持的範圍為限。
 
 Author: Nio (Master) · Reconstruction and implementation: Codex · 2026-10-10
