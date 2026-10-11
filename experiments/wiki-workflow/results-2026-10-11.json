@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-11",
+  "model": "Qwen3.5-35B-A3B-6bit",
+  "runtime": "MLX",
+  "temperature": 0,
+  "condition_design": "one bundled four-question development-case query per condition; not independent accuracy benchmark",
+  "evidence_visibility": "full private corpus and outputs local only; short deidentified excerpts in docs",
+  "records": {
+    "A": {
+      "status": "completed",
+      "read_calls": 1,
+      "search_calls": 1,
+      "format_errors": 0,
+      "retrieved_characters": 1588,
+      "elapsed_seconds": 75.282,
+      "preloaded_characters": 713,
+      "answer_sha256": "52b6a7de6195ddb0b7d3ca02ad068f4e5ce579efefe216d805b16ebba51c9898",
+      "scores": [
+        "supported",
+        "partial",
+        "supported",
+        "supported_with_scope_caveat"
+      ],
+      "api_total_tokens_sum": 2982
+    },
+    "B": {
+      "status": "completed",
+      "read_calls": 2,
+      "search_calls": 1,
+      "format_errors": 1,
+      "retrieved_characters": 4053,
+      "elapsed_seconds": 82.661,
+      "preloaded_characters": 1356,
+      "answer_sha256": "88e68ba5cea2c1e5018b2e13259cd8c59bedbd2530873484051a2fd2381113bd",
+      "scores": [
+        "supported",
+        "partial",
+        "supported",
+        "unsupported"
+      ],
+      "api_total_tokens_sum": 8358
+    },
+    "C": {
+      "status": "completed",
+      "read_calls": 2,
+      "search_calls": 1,
+      "format_errors": 1,
+      "retrieved_characters": 4053,
+      "elapsed_seconds": 81.977,
+      "preloaded_characters": 1356,
+      "answer_sha256": "88e68ba5cea2c1e5018b2e13259cd8c59bedbd2530873484051a2fd2381113bd",
+      "scores": [
+        "supported",
+        "partial",
+        "supported",
+        "unsupported"
+      ],
+      "api_total_tokens_sum": 8358
+    },
+    "D0": {
+      "status": "completed",
+      "read_calls": 4,
+      "search_calls": 2,
+      "format_errors": 1,
+      "retrieved_characters": 7030,
+      "elapsed_seconds": 121.817,
+      "preloaded_characters": 1319,
+      "answer_sha256": "0ffc8407fd4f6c486b2c3569444a613e310e555ac06596b3d7224c8bb2388859",
+      "scores": [
+        "unknown_is_appropriate",
+        "partial",
+        "supported",
+        "partial"
+      ],
+      "api_total_tokens_sum": 19980
+    },
+    "D1": {
+      "status": "completed",
+      "read_calls": 2,
+      "search_calls": 1,
+      "format_errors": 1,
+      "retrieved_characters": 3624,
+      "elapsed_seconds": 87.805,
+      "preloaded_characters": 1363,
+      "answer_sha256": "ac8209c9db97b07311ebc27010336b456d5ee20595860101c4921e6a49ca4757",
+      "scores": [
+        "supported",
+        "supported",
+        "supported",
+        "unsupported"
+      ],
+      "api_total_tokens_sum": 8111
+    }
+  },
+  "update": {
+    "exact_edits": 7,
+    "modified_files": 4,
+    "maintenance_pass": false,
+    "promotion_gate_issues": 7
+  },
+  "timing_note": "Prompt cache, sequential runs and variable runtime preclude comparative speed/cost conclusions."
+}
