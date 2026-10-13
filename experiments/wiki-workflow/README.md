@@ -10,7 +10,7 @@ Author: Nio (Master) · Implementation: Codex · 2026-10-11
 | `audit_update.py` | PyYAML；阻擋已改知識頁漏來源／日期、未更新log、raw異動；不驗語意 |
 | `update.py` | Exact replacement 精確替換；先驗證路徑、唯一匹配與重疊，再建立隔離更新複本 |
 | JSON / SHA-256 | 保存提示、完整 API 回應、工具 trace、檔案版本與終止狀態 |
-| Qwen / MLX | 本輪本機生成；模型與參數見實驗報告 |
+| Qwen / MLX | 本機推論環境；非目前協作 Wiki 案例的新測試結果 |
 | Independent AI review | 逐主張核對真實來源與工具結果，不以格式通過代替語意正確 |
 
 ```mermaid
