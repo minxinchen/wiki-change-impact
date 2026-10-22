@@ -12,56 +12,33 @@ Wiki 把原始材料整理成概念、產品與比較頁，讓 agent 不必每�
 
 既有工作站已具備 `raw → 整理文件 → wiki` 分層、`sources` 與日誌規則，以及欄位／連結 linter。本專案將其中的來源關係抽成可執行的**更新影響檢查**，並補上版本快照、反向依賴遍歷與審查報告。它與檢索工具互補：檢索回答「去哪裡找」，此工具回答「哪些地方需要重查」。
 
-## 一個完整案例
+## 先看與首頁相同的案例
 
-範例全部使用合成資料，數值不代表真實產品。
-
-1. 規格 v1 記錄 `1200 rpm`，概念頁引用它，產品頁再引用概念頁，比較頁引用產品頁。
-2. 新增規格 v2，修正為 `1000 rpm`；舊來源保留。將概念頁的 `sources` 切到 v2，但頁面正文暫時仍是舊值。
-3. 工具列出三頁待核對及各自的來源路徑。另一頁只透過 `related` 連結產品頁，不列入影響。
-4. 範例腳本把三頁正文改成新值，再比對同一基準；結果仍為 `needs_review`。文字改過不代表已由人驗收。
+[Agent 工具使用規則範例](../examples/agent-wiki/README.md)：原始討論增加「內部文件外傳需要授權」，知識頁切換到新版來源後，工具列出規則頁與索引待核對。
 
 ```text
-demo:raw/spec-v2.txt
-  → demo:wiki/concept.md
-  → demo:wiki/product.md
-  → demo:wiki/comparison.md
+raw/tool-policy-v2.md（新版原始討論）
+  → wiki/tool-selection.md（工具選用規則）
+  → INDEX.md（任務索引）
 ```
 
-報告中的一筆結果（節錄）：
-
-```json
-{
-  "page": "demo:wiki/comparison.md",
-  "reasons": [{
-    "changed_source": "demo:raw/spec-v2.txt",
-    "path": [
-      "demo:raw/spec-v2.txt",
-      "demo:wiki/concept.md",
-      "demo:wiki/product.md",
-      "demo:wiki/comparison.md"
-    ]
-  }]
-}
-```
-
-每個變動來源對每頁保留一條前後聯集上的最短候選路徑。新版完整 JSON 另含 `edges[].versions`、`path_versions` 與 `path_scope`；跨版混合路徑明示 `cross_version_candidate`，不是任何單一版本成立的引用證據。這筆輸出說明「為何要檢查比較頁」，不代表它已判讀頁面中的數字。
-
-## 快速重跑
-
-需要 Python 3.10+；只有 YAML 解析使用第三方依賴。
+需要 Python 3.10+。在 repo 根目錄執行：
 
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python -B demo.py --out runs/demo
+.venv/bin/python -B agent-wiki-demo.py --out runs/agent-wiki-demo
 ```
 
-打開 `runs/demo/report.html`，即可檢視來源切換後的影響報告；`report.json` 與 `after-correction.json` 保存機器可讀結果。範例只操作複製到 `runs/demo/case/` 的合成資料，不接觸任何正式 Wiki。重跑需指定新的輸出目錄，避免覆寫先前證據。
+開啟 `runs/agent-wiki-demo/report.html`；同目錄的 `report.json` 可交給後續程式。輸出目錄必須是新路徑。腳本只修改隔離複本，不修改正式 Wiki，也不呼叫模型。
 
-```sh
-.venv/bin/python -B -m unittest discover -s tests -v
-```
+頁面被列入不表示內容一定錯誤。程式依來源關係找出需要檢查的地方，由人或 reviewer 決定是否修訂。
+
+### 報告如何說明影響？
+
+每個變動來源對每頁保留一條前後聯集上的最短候選路徑。JSON 的 `edges[].versions`、`path_versions` 與 `path_scope` 區分前版、後版與跨版路徑。跨版混合路徑明示 `cross_version_candidate`，不是任何單一版本成立的引用證據。
+
+原有 `demo.py` 與 `examples/vault/` 保留為數值修正的回歸測試資料；作品入口使用上述工具選用案例。
 
 ## 重跑比較評估
 
